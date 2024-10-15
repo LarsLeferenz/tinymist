@@ -20,11 +20,15 @@ import {
   registerPreviewTaskDispose,
 } from "../extension";
 import { isGitpod, translateGitpodURL } from "../gitpod";
+import { isCodeServer, translateCodeServerURL } from "../code-server";
 
 function translateExternalURL(urlstr: string): string {
   if (isGitpod()) {
     return translateGitpodURL(urlstr);
-  } else {
+  } else if (isCodeServer()) {
+    return translateCodeServerURL(urlstr);
+  } 
+  else{
     return urlstr;
   }
 }
